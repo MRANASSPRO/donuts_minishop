@@ -1,10 +1,10 @@
-import 'package:donuts_minishop/ui/donut_bottom_bar.dart';
+import 'package:donuts_minishop/ui/bottom/donut_bottom_bar.dart';
+import 'package:donuts_minishop/utils.dart';
 import 'package:flutter/material.dart';
-import 'utils.dart';
-import 'package:donuts_minishop/ui/donut_side_menu.dart';
+import 'package:donuts_minishop/ui/drawer/donut_side_menu.dart';
 
-class DonutShopLanding extends StatelessWidget {
-  const DonutShopLanding({Key? key}) : super(key: key);
+class DonutShopMain extends StatelessWidget {
+  const DonutShopMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
