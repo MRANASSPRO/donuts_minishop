@@ -10,8 +10,10 @@ class DonutBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(30),
+      /// only the consumer widget will rebuild itself
+      /// when call up to the service with the new value, and thus invoking the notifyListeners method
       child: Consumer<DonutBottomBarSelectionService>(builder:
-          (BuildContext context, bottomBarSelectionService, Widget? child) {
+          (context, bottomBarSelectionService, Widget? child) {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
