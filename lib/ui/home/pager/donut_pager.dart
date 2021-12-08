@@ -1,4 +1,4 @@
-import 'package:donuts_minishop/models/donut_page.dart';
+import 'package:donuts_minishop/models/donut_page_item.dart';
 import 'package:donuts_minishop/ui/home/pager/page_view_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:donuts_minishop/utils.dart';
@@ -29,7 +29,7 @@ class _DonutPagerState extends State<DonutPager> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350, // this size is measured with px
+      height: MediaQuery.of(context).size.height / 3 - 20, // this size is measured with px
       child: Column(
         children: [
           Expanded(
@@ -41,7 +41,7 @@ class _DonutPagerState extends State<DonutPager> {
             ///  use the List.generate factory method with this list
             ///  to generate widgets on the fly based on how many DonutPage objects we have,
             children: List.generate(pages.length, (index) {
-              DonutPage currentPage = pages[index];
+              DonutPage page = pages[index];
 
               /// build each PageView page out of this Container widget
               return Container(
@@ -57,9 +57,9 @@ class _DonutPagerState extends State<DonutPager> {
                           offset: const Offset(0.0, 5.0))
                     ],
                     image: DecorationImage(
-                        image: NetworkImage(currentPage.imgUrl!),
-                        fit: BoxFit.cover)),
-                child: Image.network(currentPage.logoImgUrl!, width: 120),
+                        image: NetworkImage(page.imgUrl!), fit: BoxFit.cover),
+                ),
+                child: Image.network(page.logoImgUrl!, width: 120),
               );
             }),
 
