@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DonutBottomBar extends StatelessWidget {
-  DonutBottomBar({Key? key}) : super(key: key);
+  const DonutBottomBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

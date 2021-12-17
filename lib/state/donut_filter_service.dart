@@ -21,9 +21,8 @@ class DonutFilterService extends ChangeNotifier {
   /// filter donuts to trigger a widget rebuild in the event that the selectedDonutType has changed
   void filterDonutsByType(String type) {
     selectedDonutType = type;
-    filteredDonuts = Utils.donuts
-        .where((donutElement) => donutElement.type == selectedDonutType)
-        .toList();
+    filteredDonuts = Utils.donuts.where(
+            (donutElement) => donutElement.type == selectedDonutType).toList();
     notifyListeners();
   }
 }

@@ -5,7 +5,7 @@ import 'package:donuts_minishop/utils.dart';
 import 'package:flutter/material.dart';
 
 class DonutShopMain extends StatelessWidget {
-  DonutShopMain({Key? key}) : super(key: key);
+  const DonutShopMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class DonutShopMain extends StatelessWidget {
                     Widget page;
                     switch (settings.name) {
                       case '/main':
-                        page = DonutMainPage();
+                        page = const DonutMainPage();
                         break;
                       case '/favorites':
                         page = const Center(child: Text('favorites'));
@@ -50,11 +50,8 @@ class DonutShopMain extends StatelessWidget {
                         pageBuilder: (_, __, ___) => page,
                         transitionDuration: const Duration(seconds: 0));
                   })
-
-              /// placeholder for Navigator
               ),
-          DonutBottomBar()
-          //placeholder for BottomBar
+          const DonutBottomBar()
         ],
       ),
     );

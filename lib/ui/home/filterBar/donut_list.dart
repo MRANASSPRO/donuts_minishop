@@ -20,6 +20,10 @@ class _DonutListState extends State<DonutList> {
   void initState() {
     super.initState();
 
+    /// create a loop that runs for the length of provided donut items in the widget.donuts collection,
+    /// and for each iteration, create a Future object with a 125 ms. delay, inserted in the holding collection insertedItems
+    /// as well as insert the corresponding index directly to the AnimatedList
+    /// (via the GlobalKey reference, i.e. key.currentState!.insertItem).
     var future = Future(() {});
     for (var i = 0; i < widget.donutsProducts!.length; i++) {
       //anonymous params are indicated with _
@@ -44,9 +48,10 @@ class _DonutListState extends State<DonutList> {
 
           return SlideTransition(
             position: Tween(
-                    begin: const Offset(0.2, 0.0), end: const Offset(0.0, 0.0))
-                .animate(CurvedAnimation(
-                    parent: animation, curve: Curves.easeInOut)),
+              begin: const Offset(0.2, 0.0),
+              end: const Offset(0.0, 0.0),
+            ).animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeInOut)),
             child: FadeTransition(
               opacity: Tween(begin: 0.0, end: 1.0).animate(
                   CurvedAnimation(parent: animation, curve: Curves.easeInOut)),

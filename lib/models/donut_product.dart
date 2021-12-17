@@ -5,6 +5,6 @@ class DonutProduct {
   double? price;
   String? type;
 
-  DonutProduct(
-      {this.imgUrl, this.name, this.description, this.price, this.type});
+  /// a PODO model to encapsulate a collection of donut products, each of which may contain the image of the product, name, price and description
+  DonutProduct({this.imgUrl, this.name, this.description, this.price, this.type});
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class DonutCard extends StatelessWidget {
   DonutProduct? donutInfo;
+
   DonutCard({ this.donutInfo });
 
   @override
