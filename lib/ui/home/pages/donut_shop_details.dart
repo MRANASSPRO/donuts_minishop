@@ -11,8 +11,28 @@ class DonutShopDetails extends StatefulWidget {
   _DonutShopDetailsState createState() => _DonutShopDetailsState();
 }
 
-class _DonutShopDetailsState extends State<DonutShopDetails> {
+class _DonutShopDetailsState extends State<DonutShopDetails> with SingleTickerProviderStateMixin {
   DonutProduct? selectedDonut;
+  AnimationController? animationController;
+  Animation<double>? rotationAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(
+        duration: const Duration(seconds: 20),
+        vsync: this)..repeat();
+
+    rotationAnimation = Tween<double>(begin: 0, end: 1)
+        .animate(CurvedAnimation(parent: animationController!, curve: Curves.linear));
+  }
+
+  @override
+  void dispose() {
+    animationController!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +61,15 @@ class _DonutShopDetailsState extends State<DonutShopDetails> {
                 Positioned(
                   top: -40,
                   right: -120,
-                  child: Image.network(selectedDonut!.imgUrl!,
-                      width: MediaQuery.of(context).size.width * 1.25,
-                      fit: BoxFit.contain),
+                  child: Hero(
+                    tag: selectedDonut!.name!,
+                    child: RotationTransition(
+                      turns: rotationAnimation!,
+                      child: Image.network(selectedDonut!.imgUrl!,
+                          width: MediaQuery.of(context).size.width * 1.25,
+                          fit: BoxFit.contain),
+                    ),
+                  ),
                 ),
               ],
             ),
