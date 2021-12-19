@@ -1,9 +1,8 @@
-import 'package:donuts_minishop/ui/home/donut_shop_home.dart';
 import 'package:donuts_minishop/utils.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
-   SplashPage({Key? key}) : super(key: key);
+   const SplashPage({Key? key}) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPageState();

@@ -1,5 +1,5 @@
 import 'package:donuts_minishop/models/donut_filter_bar_item.dart';
-import 'package:donuts_minishop/state/donut_filter_service.dart';
+import 'package:donuts_minishop/state/donut_service.dart';
 import 'package:donuts_minishop/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +11,7 @@ class DonutFilterBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(20),
-        child: Consumer<DonutFilterService>(
+        child: Consumer<DonutService>(
           builder: (context, donutService, child) {
             return Column(
               children: [
