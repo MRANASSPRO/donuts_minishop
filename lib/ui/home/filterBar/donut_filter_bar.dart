@@ -30,8 +30,7 @@ class DonutFilterBar extends StatelessWidget {
                         child: Text(
                           '${item.label}',
                           style: TextStyle(
-                              color:
-                                  donutService.selectedDonutType == item.label
+                              color: donutService.selectedDonutType == item.label
                                       ? Utils.mainColor
                                       : Colors.black,
                               fontWeight: FontWeight.bold),
