@@ -1,5 +1,7 @@
 import 'package:donuts_minishop/models/donut_product.dart';
 import 'package:donuts_minishop/state/donut_service.dart';
+import 'package:donuts_minishop/state/donut_shopping_cart_service.dart';
+import 'package:donuts_minishop/ui/cart/donut_shopping_cart_badge.dart';
 import 'package:donuts_minishop/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +13,8 @@ class DonutShopDetails extends StatefulWidget {
   _DonutShopDetailsState createState() => _DonutShopDetailsState();
 }
 
-class _DonutShopDetailsState extends State<DonutShopDetails> with SingleTickerProviderStateMixin {
+class _DonutShopDetailsState extends State<DonutShopDetails>
+    with SingleTickerProviderStateMixin {
   DonutProduct? selectedDonut;
   AnimationController? animationController;
   Animation<double>? rotationAnimation;
@@ -20,12 +23,12 @@ class _DonutShopDetailsState extends State<DonutShopDetails> with SingleTickerPr
   void initState() {
     super.initState();
 
-    animationController = AnimationController(
-        duration: const Duration(seconds: 20),
-        vsync: this)..repeat();
+    animationController =
+        AnimationController(duration: const Duration(seconds: 20), vsync: this)
+          ..repeat();
 
-    rotationAnimation = Tween<double>(begin: 0, end: 1)
-        .animate(CurvedAnimation(parent: animationController!, curve: Curves.linear));
+    rotationAnimation = Tween<double>(begin: 0, end: 1).animate(
+        CurvedAnimation(parent: animationController!, curve: Curves.linear));
   }
 
   @override
@@ -51,6 +54,9 @@ class _DonutShopDetailsState extends State<DonutShopDetails> with SingleTickerPr
           width: 120,
           child: Image.network(Utils.donutLogoRedText),
         ),
+        actions: const [
+          DonutShoppingCartBadge()
+        ],
       ),
       body: Column(
         children: [
@@ -115,22 +121,52 @@ class _DonutShopDetailsState extends State<DonutShopDetails> with SingleTickerPr
                   ),
                   const SizedBox(height: 20),
                   Text(selectedDonut!.description!),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-                    decoration: BoxDecoration(
-                      color: Utils.mainDark.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.shopping_cart, color: Utils.mainDark),
-                        SizedBox(width: 20),
-                        Text('Add To Cart', style: TextStyle(color: Utils.mainDark)),
-                      ],
-                    ),
+                  Consumer<DonutShoppingCartService>(
+                    builder: (context, cartService, child) {
+                      if (!cartService.isDonutInCart(selectedDonut!)) {
+                        return GestureDetector(
+                          onTap: () {
+                            cartService.addToCart(selectedDonut!);
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.only(
+                                top: 10, bottom: 10, left: 20, right: 20),
+                            decoration: BoxDecoration(
+                              color: Utils.mainDark.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.shopping_cart,
+                                    color: Utils.mainDark),
+                                SizedBox(width: 20),
+                                Text('Add To Cart',
+                                    style: TextStyle(color: Utils.mainDark)),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.check_rounded, color: Utils.mainDark),
+                            SizedBox(width: 20),
+                            Text(
+                              'Added to Cart',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Utils.mainDark),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
