@@ -1,5 +1,6 @@
 import 'package:donuts_minishop/state/donut_bottom_bar_selection_service.dart';
 import 'package:donuts_minishop/state/donut_service.dart';
+import 'package:donuts_minishop/state/donut_shopping_cart_service.dart';
 import 'package:donuts_minishop/ui/home/donut_shop_home.dart';
 import 'package:donuts_minishop/ui/home/pages/donut_shop_details.dart';
 import 'package:donuts_minishop/ui/splash_page.dart';
@@ -19,7 +20,8 @@ class DonutsMiniShop extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => DonutBottomBarSelectionService()),
-        ChangeNotifierProvider(create: (_) => DonutService())
+        ChangeNotifierProvider(create: (_) => DonutService()),
+        ChangeNotifierProvider(create: (_) => DonutShoppingCartService())
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
